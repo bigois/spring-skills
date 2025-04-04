@@ -11,8 +11,8 @@
 	<groupId>br.com.organacode</groupId>
 	<artifactId>spring-skills</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-skills</name>
-	<description>spring-skills</description>
+	<name>spring-main</name>
+	<description>spring-main</description>
 	<url/>
 	<licenses>
 		<license/>
