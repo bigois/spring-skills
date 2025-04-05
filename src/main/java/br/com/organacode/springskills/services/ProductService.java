@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -20,5 +21,9 @@ public class ProductService {
 
         productList.forEach(product -> productListDTO.add(new ProductDTO(product.getDescription(), product.getPrice())));
         return productListDTO;
+    }
+
+    public ProductDTO getProductById(UUID id) {
+        return productRepository.findById(id).map(product -> new ProductDTO(product.getDescription(), product.getPrice())).orElse(null);
     }
 }
