@@ -1,5 +1,6 @@
 package br.com.organacode.springskills.entities;
 
+import br.com.organacode.springskills.dtos.ProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +26,14 @@ public class Product {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    public Product(String description, BigDecimal price) {
+        this.description = description;
+        this.price = price;
+    }
+
+    public Product(ProductDTO productDTO) {
+        this.description = productDTO.description();
+        this.price = productDTO.price();
+    }
 }

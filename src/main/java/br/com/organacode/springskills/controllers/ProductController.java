@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,5 +28,22 @@ public class ProductController {
     public ResponseEntity<ProductDTO> getProductById(@PathVariable UUID id) {
         ProductDTO productDTO = productService.getProductById(id);
         return ResponseEntity.status(HttpStatusCode.valueOf(productDTO == null ? 204 : 200)).body(productDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
+        UUID id = productService.createProduct(productDTO);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping("/{id}")
+    public void updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
+        productService.updateProduct(id, productDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable UUID id) {
+        productService.deleteProduct(id);
     }
 }
