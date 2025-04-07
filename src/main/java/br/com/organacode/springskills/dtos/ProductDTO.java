@@ -14,7 +14,4 @@ public record ProductDTO(
         @Positive(message = "must be greater than zero")
         BigDecimal price
 ) {
-    public ProductDTO(Product product) {
-        this(product.getDescription(), product.getPrice());
-    }
 }

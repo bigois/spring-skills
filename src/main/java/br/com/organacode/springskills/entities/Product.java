@@ -31,9 +31,4 @@ public class Product {
         this.description = description;
         this.price = price;
     }
-
-    public Product(ProductDTO productDTO) {
-        this.description = productDTO.description();
-        this.price = productDTO.price();
-    }
 }
