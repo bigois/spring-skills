@@ -2,6 +2,7 @@ package br.com.organacode.springskills.controllers;
 
 import br.com.organacode.springskills.dtos.ProductDTO;
 import br.com.organacode.springskills.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -31,14 +32,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<String> createProduct(@RequestBody @Valid ProductDTO productDTO) {
         UUID id = productService.createProduct(productDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
-    public void updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
+    public void updateProduct(@PathVariable UUID id, @RequestBody @Valid ProductDTO productDTO) {
         productService.updateProduct(id, productDTO);
     }
 

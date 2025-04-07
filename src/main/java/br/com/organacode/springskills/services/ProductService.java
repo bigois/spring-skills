@@ -3,6 +3,7 @@ package br.com.organacode.springskills.services;
 import br.com.organacode.springskills.dtos.ProductDTO;
 import br.com.organacode.springskills.entities.Product;
 import br.com.organacode.springskills.repositories.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class ProductService {
     }
 
     public ProductDTO getProductById(UUID id) {
-        return productRepository.findById(id).map(ProductDTO::new).orElse(null);
+        return productRepository.findById(id).map(ProductDTO::new).orElseThrow(() -> new EntityNotFoundException("product not found"));
     }
 
     public UUID createProduct(ProductDTO productDTO) {
@@ -33,7 +34,7 @@ public class ProductService {
     }
 
     public ProductDTO updateProduct(UUID id, ProductDTO productDTO) {
-        Product product = productRepository.findById(id).orElse(null);
+        Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
 
         product.setDescription(productDTO.description());
         product.setPrice(productDTO.price());
@@ -43,6 +44,7 @@ public class ProductService {
     }
 
     public void deleteProduct(UUID id) {
+        productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
         productRepository.deleteById(id);
     }
 }
