@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Quick Request ###
+/.fastRequest/config/fastRequestCurrentProjectEnvironment.json
