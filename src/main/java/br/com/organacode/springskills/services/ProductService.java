@@ -2,7 +2,7 @@ package br.com.organacode.springskills.services;
 
 import br.com.organacode.springskills.dtos.ProductDTO;
 import br.com.organacode.springskills.entities.Product;
-import br.com.organacode.springskills.repository.ProductRepository;
+import br.com.organacode.springskills.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
