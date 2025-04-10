@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public record ProductDTO(
         @NotBlank(message = "cannot be null or empty")
-        @Size(min = 5, message = "size must be between {min} and {max}")
+        @Size(min = 5, max = 100, message = "size must be between {min} and {max}")
         String description,
 
         @NotNull(message = "cannot be null")

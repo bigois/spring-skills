@@ -14,9 +14,10 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
-    private final ProductMapper productMapper;
     @Autowired
     private ProductRepository productRepository;
+
+    private final ProductMapper productMapper;
 
     public ProductService(ProductMapper productMapper) {
         this.productMapper = productMapper;
