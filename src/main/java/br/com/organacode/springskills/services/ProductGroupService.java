@@ -15,10 +15,9 @@ import java.util.UUID;
 
 @Service
 public class ProductGroupService {
+    private final ProductGroupMapper productGroupMapper;
     @Autowired
     private ProductGroupRepository productGroupRepository;
-
-    private final ProductGroupMapper productGroupMapper;
 
     public ProductGroupService(ProductGroupMapper productGroupMapper) {
         this.productGroupMapper = productGroupMapper;

@@ -8,7 +8,10 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ProductGroupMapper {
     ProductGroup toEntityFromRequest(ProductGroupRequestDTO dto);
+
     ProductGroupRequestDTO toRequestDTO(ProductGroup entity);
+
     ProductGroup toEntityFromResponse(ProductGroupResponseDTO dto);
+
     ProductGroupResponseDTO toResponseDTO(ProductGroup entity);
 }
