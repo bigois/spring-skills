@@ -1,6 +1,6 @@
 package br.com.organacode.springskills.controllers;
 
-import br.com.organacode.springskills.dtos.ProductDTO;
+import br.com.organacode.springskills.dtos.ProductRequestDTO;
 import br.com.organacode.springskills.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +21,26 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<List<ProductRequestDTO>> getAllProducts() {
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable UUID id) {
-        ProductDTO productDTO = productService.getProductById(id);
-        return ResponseEntity.status(HttpStatusCode.valueOf(productDTO == null ? 204 : 200)).body(productDTO);
+    public ResponseEntity<ProductRequestDTO> getProductById(@PathVariable UUID id) {
+        ProductRequestDTO productRequestDTO = productService.getProductById(id);
+        return ResponseEntity.status(HttpStatusCode.valueOf(productRequestDTO == null ? 204 : 200)).body(productRequestDTO);
     }
 
     @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody @Valid ProductDTO productDTO) {
-        UUID id = productService.createProduct(productDTO);
+    public ResponseEntity<String> createProduct(@RequestBody @Valid ProductRequestDTO productRequestDTO) {
+        UUID id = productService.createProduct(productRequestDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
-    public void updateProduct(@PathVariable UUID id, @RequestBody @Valid ProductDTO productDTO) {
-        productService.updateProduct(id, productDTO);
+    public void updateProduct(@PathVariable UUID id, @RequestBody @Valid ProductRequestDTO productRequestDTO) {
+        productService.updateProduct(id, productRequestDTO);
     }
 
     @DeleteMapping("/{id}")

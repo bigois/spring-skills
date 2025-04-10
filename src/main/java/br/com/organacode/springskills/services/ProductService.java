@@ -1,6 +1,6 @@
 package br.com.organacode.springskills.services;
 
-import br.com.organacode.springskills.dtos.ProductDTO;
+import br.com.organacode.springskills.dtos.ProductRequestDTO;
 import br.com.organacode.springskills.entities.Product;
 import br.com.organacode.springskills.mappers.ProductMapper;
 import br.com.organacode.springskills.repositories.ProductRepository;
@@ -23,28 +23,28 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
-    public List<ProductDTO> getAllProducts() {
+    public List<ProductRequestDTO> getAllProducts() {
         List<Product> productList = productRepository.findAll();
-        List<ProductDTO> productListDTO = new ArrayList<>();
+        List<ProductRequestDTO> productListDTO = new ArrayList<>();
 
         productList.forEach(product -> productListDTO.add(productMapper.toDTO(product)));
         return productListDTO;
     }
 
-    public ProductDTO getProductById(UUID id) {
+    public ProductRequestDTO getProductById(UUID id) {
         return productRepository.findById(id).map(productMapper::toDTO).orElseThrow(() -> new EntityNotFoundException("product not found"));
     }
 
-    public UUID createProduct(ProductDTO productDTO) {
-        Product product = productRepository.save(productMapper.toEntity(productDTO));
+    public UUID createProduct(ProductRequestDTO productRequestDTO) {
+        Product product = productRepository.save(productMapper.toEntity(productRequestDTO));
         return product.getId();
     }
 
-    public ProductDTO updateProduct(UUID id, ProductDTO productDTO) {
+    public ProductRequestDTO updateProduct(UUID id, ProductRequestDTO productRequestDTO) {
         Product product = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
 
-        product.setDescription(productDTO.description());
-        product.setPrice(productDTO.price());
+        product.setDescription(productRequestDTO.description());
+        product.setPrice(productRequestDTO.price());
         productRepository.save(product);
 
         return productMapper.toDTO(product);

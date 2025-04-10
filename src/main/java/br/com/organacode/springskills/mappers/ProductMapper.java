@@ -1,6 +1,6 @@
 package br.com.organacode.springskills.mappers;
 
-import br.com.organacode.springskills.dtos.ProductDTO;
+import br.com.organacode.springskills.dtos.ProductRequestDTO;
 import br.com.organacode.springskills.entities.Product;
 import br.com.organacode.springskills.entities.ProductGroup;
 import org.mapstruct.Mapper;
@@ -11,10 +11,10 @@ import java.util.UUID;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
     @Mapping(source = "group", target = "group")
-    Product toEntity(ProductDTO dto);
+    Product toEntity(ProductRequestDTO dto);
 
     @Mapping(source = "group", target = "group")
-    ProductDTO toDTO(Product entity);
+    ProductRequestDTO toDTO(Product entity);
 
     default ProductGroup fromId(UUID id) {
         if (id == null) {

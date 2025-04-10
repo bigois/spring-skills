@@ -7,7 +7,7 @@ import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public record ProductDTO(
+public record ProductRequestDTO(
         @NotBlank(message = "cannot be null or empty")
         @Size(min = 5, max = 100, message = "size must be between {min} and {max}")
         String description,
