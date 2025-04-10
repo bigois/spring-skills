@@ -2,12 +2,10 @@ package br.com.organacode.springskills.dtos;
 
 import br.com.organacode.springskills.enums.ProductType;
 import br.com.organacode.springskills.validations.ValidEnum;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public record ProductDTO(
         @NotBlank(message = "cannot be null or empty")
@@ -20,6 +18,9 @@ public record ProductDTO(
 
         @NotNull(message = "cannot be null")
         @ValidEnum(enumClass = ProductType.class, message = "should be KT, LP, RW, FP, IP, SV or GN")
-        ProductType type
+        ProductType type,
+
+        @NotNull(message = "cannot be null")
+        UUID group
 ) {
 }

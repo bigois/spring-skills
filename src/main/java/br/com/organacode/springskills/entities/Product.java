@@ -30,4 +30,8 @@ public class Product {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductType type;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "group_id", nullable = false)
+    private ProductGroup group;
 }
