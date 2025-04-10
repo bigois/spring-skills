@@ -1,17 +1,25 @@
 package br.com.organacode.springskills.dtos;
 
-import br.com.organacode.springskills.entities.Product;
-import jakarta.validation.constraints.*;
+import br.com.organacode.springskills.enums.ProductType;
+import br.com.organacode.springskills.validations.ValidEnum;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
 public record ProductDTO(
         @NotBlank(message = "cannot be null or empty")
-        @Size(min = 1, message = "size must be between {min} and {max}")
+        @Size(min = 5, message = "size must be between {min} and {max}")
         String description,
 
         @NotNull(message = "cannot be null")
         @Positive(message = "must be greater than zero")
-        BigDecimal price
+        BigDecimal price,
+
+        @NotNull(message = "cannot be null")
+        @ValidEnum(enumClass = ProductType.class, message = "should be KT, LP, RW, FP, IP, SV or GN")
+        ProductType type
 ) {
 }
