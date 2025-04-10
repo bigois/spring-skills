@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ProductException {
+public class GlobalException {
     private final Instant timestamp = Instant.now();
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
